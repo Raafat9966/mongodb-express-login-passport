@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+	<%- include('partials/head') %>
+	<body>
+		<%- include('partials/header', {page: 'register'}) %>
+
+		<div class="container">
+			<form id="form" class="form" action="/register" method="POST">
+				<h2>Register here</h2>
+				<div class="form-control">
+					<input
+						name="username"
+						type="text"
+						id="username"
+						class="form__input"
+						placeholder=" "
+					/>
+					<label for="username" class="form__label">Username</label>
+					<small>Error message</small>
+				</div>
+				<div class="form-control">
+					<input
+						name="email"
+						type="email"
+						id="email"
+						class="form__input"
+						placeholder=" "
+					/>
+					<label for="email" class="form__label">Email</label>
+					<small>Error message</small>
+				</div>
+				<div class="form-control">
+					<input
+						name="password"
+						type="password"
+						id="password"
+						class="form__input"
+						placeholder=" "
+					/>
+					<label for="password" class="form__label">Password</label>
+					<small>Error message</small>
+				</div>
+				<div class="form-control">
+					<input
+						type="password"
+						id="password-confirmation"
+						class="form__input"
+						placeholder=" "
+					/>
+					<label for="" class="form__label">Confirm Password</label>
+					<small>Error message</small>
+				</div>
+				<button type="submit">Submit</button>
+			</form>
+		</div>
+
+		<script src="script/script.js"></script>
+	</body>
+</html>

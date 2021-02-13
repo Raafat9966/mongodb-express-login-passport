@@ -1,0 +1,10 @@
+<div class="container-fluid">
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+		<a class="navbar-brand m-2" href="/">Home</a>
+		<% if (page === "register") { %>
+		<a class="navbar-brand m-2" href="/login">login</a>
+		<% } else if (page === "login") { %>
+		<a class="navbar-brand m-2" href="/register">Register</a>
+		<% } %>
+	</nav>
+</div>
