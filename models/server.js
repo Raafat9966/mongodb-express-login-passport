@@ -39,7 +39,7 @@ const connect = async () => {
 const addUser = async (username, email, password) => {
 	try {
 		await connect();
-		await bcrypt.hash(password, 10, async (err, hash) => {
+		bcrypt.hash(password, 10, async (err, hash) => {
 			let newUser = await new User({
 				username,
 				email,
@@ -52,6 +52,19 @@ const addUser = async (username, email, password) => {
 	}
 };
 
+const getUser = async (username, password) => {
+	try {
+		await connect();
+		let result = await User.findOne(username);
+		let data = await bcrypt.compare(password, result.password);
+		if (data) return data;
+		else return "password doesn't match";
+	} catch (err) {
+		createError(500, err);
+	}
+};
+
 module.exports = {
 	addUser,
+	getUser,
 };
