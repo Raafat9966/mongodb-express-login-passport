@@ -31,10 +31,10 @@ router.post("/register", async (req, res) => {
 });
 
 router.post("/login", async (req, res) => {
+	let { username, password } = req.body;
 	try {
-		let { username, password } = req.body;
 		await db.getUser(username, password);
-		res.status(200).redirect("/user", { data });
+		res.status(200).send("user");
 	} catch (err) {
 		res.status(400).send(err);
 	}
@@ -42,7 +42,7 @@ router.post("/login", async (req, res) => {
 
 // * google sign in
 
-router.get("/sign-in", (req, res) => res.render("sign-in"));
+// router.get("/sign-in", (req, res) => res.render("sign-in"));
 
 router.post("/sign-in", (req, res) => {
 	let token = req.body.token;
@@ -55,6 +55,7 @@ router.post("/sign-in", (req, res) => {
 		const payload = ticket.getPayload();
 		// const userid = payload["sub"];
 		//console.log(payload);
+		db.addUser(payload.name, payload.email, "123456");
 	}
 	verify()
 		.then(() => {

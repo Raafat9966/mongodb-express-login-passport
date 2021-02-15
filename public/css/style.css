@@ -13,6 +13,10 @@
 	--border-color: #dadce0;
 	--body-font: "Roboto", sans-serif;
 	--normal-font-size: 1rem;
+	--prim-color: #ecf0f3;
+	--sac-color: #ffffff;
+	--thir-color: #555;
+	--other-color: #cbced1;
 }
 
 body {
@@ -21,8 +25,15 @@ body {
 	/* display: flex;
     align-items: center;
     justify-content: center; */
-	min-height: 100vh;
-	margin: 0;
+
+	height: 100vh;
+	width: 100vw;
+	overflow: hidden;
+	/* font-family: Arial, Helvetica, sans-serif; */
+	font-weight: 700;
+
+	color: var(--thir-color);
+	background-color: var(--prim-color);
 }
 
 .container {
@@ -91,7 +102,7 @@ h2 {
 	cursor: pointer;
 	background-color: #3498db;
 	border: 2px solid #3498db;
-	border-radius: 4px;
+	/* border-radius: 4px; */
 	color: #fff;
 	display: block;
 	font-size: 18px;
@@ -142,4 +153,91 @@ h2 {
 
 .form__input:focus {
 	border: 1.5px solid var(--first-color);
+}
+
+/* google login */
+#google {
+	margin-top: 10px;
+}
+
+/* login form */
+.login {
+	/* width: 25%;
+	height: 90vh; */
+	padding: 35px 35px 35px 35px;
+	/* border-radius: 40px; */
+	background: var(--prim-color);
+	box-shadow: 13px 13px 20px var(--other-color),
+		-13px -13px 20px var(--sac-color);
+}
+.logo {
+	background-image: url("../img/awesome.png");
+	background-size: cover;
+	width: 100px;
+	height: 100px;
+	border-radius: 50px;
+	margin: 0 auto;
+	box-shadow: 0px 0px 2px #5f5f5f, 0px 0px 0px 05px var(--prim-color),
+		8px 8px 15px #a7aaaf, -8px -8px 15px var(--sac-color);
+}
+.title {
+	text-align: center;
+	font-size: 20px;
+	padding-top: 24px;
+	letter-spacing: 0.5px;
+}
+
+.fields {
+	width: 100%;
+	padding: 75px 5px 5px 5px;
+}
+.fields input {
+	border: none;
+	outline: none;
+	background: none;
+	font-size: 18px;
+	color: var(--thir-color);
+	padding: 20px 10px 10px 5px;
+}
+.username,
+.password {
+	display: flex;
+	flex-flow: row nowrap;
+	align-items: center;
+	margin-bottom: 20px;
+	border-radius: 25px;
+	box-shadow: inset 8px 8px 8px var(--other-color),
+		inset -80px -80px 8px var(--sac-color);
+}
+.fields svg {
+	height: 20px;
+	margin: 0 10px -3px 25px;
+}
+
+input.user-input:focus,
+input.pass-input:focus {
+	outline: none;
+	border-radius: 25px;
+}
+.signin-button {
+	outline: none;
+	border: none;
+	cursor: pointer;
+	width: 100%;
+	height: 60px;
+	border-radius: 30px;
+	font-size: 20px;
+	font-weight: 700;
+	font-family: "Lato", sans-serif;
+	color: #fff;
+	text-align: center;
+	background: #30e7ff;
+	box-shadow: 3px 3px 8px #b1b1b1, -3px -3px 8px #ffffff;
+	transition: 0.5s;
+}
+.signin-button:hover {
+	background: #4ed6d8;
+}
+.signin-button:active {
+	background: #1da8a8;
 }

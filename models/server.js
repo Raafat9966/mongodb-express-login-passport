@@ -55,14 +55,47 @@ const addUser = async (username, email, password) => {
 const getUser = async (username, password) => {
 	try {
 		await connect();
-		let result = await User.findOne(username);
+		let result = await User.findOne({ username });
+		if (!result) return createError(400, "user doesn't exist");
 		let data = await bcrypt.compare(password, result.password);
-		if (data) return data;
-		else return "password doesn't match";
+		if (data) {
+			return data;
+		} else {
+			createError(400, "password doesn't match");
+		}
 	} catch (err) {
 		createError(500, err);
 	}
 };
+
+// const getUser = (username, password) => {
+// 	return new Promise((res, rej) => {
+// 		connect()
+// 			.then(() => {
+// 				User.findOne({ username })
+// 					.then((result) => {
+// 						console.log(result);
+// 						if (!result) {
+// 							rej("user is not exist");
+// 						} else {
+// 							bcrypt
+// 								.compare(password, result.password)
+// 								.then((data) => {
+// 									if (data) res();
+// 									else rej("the password doesn't match");
+// 								})
+// 								.catch((err) => {
+// 									rej(err);
+// 								});
+// 						}
+// 					})
+// 					.catch((err) => {
+// 						rej(err);
+// 					});
+// 			})
+// 			.catch((err) => rej(err));
+// 	});
+// };
 
 module.exports = {
 	addUser,
