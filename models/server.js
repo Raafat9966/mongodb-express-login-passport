@@ -52,50 +52,54 @@ const addUser = async (username, email, password) => {
 	}
 };
 
-const getUser = async (username, password) => {
-	try {
-		await connect();
-		let result = await User.findOne({ username });
-		if (!result) return createError(400, "user doesn't exist");
-		let data = await bcrypt.compare(password, result.password);
-		if (data) {
-			return data;
-		} else {
-			createError(400, "password doesn't match");
-		}
-	} catch (err) {
-		createError(500, err);
-	}
-};
-
-// const getUser = (username, password) => {
-// 	return new Promise((res, rej) => {
-// 		connect()
-// 			.then(() => {
-// 				User.findOne({ username })
-// 					.then((result) => {
-// 						console.log(result);
-// 						if (!result) {
-// 							rej("user is not exist");
-// 						} else {
-// 							bcrypt
-// 								.compare(password, result.password)
-// 								.then((data) => {
-// 									if (data) res();
-// 									else rej("the password doesn't match");
-// 								})
-// 								.catch((err) => {
-// 									rej(err);
-// 								});
-// 						}
-// 					})
-// 					.catch((err) => {
-// 						rej(err);
-// 					});
-// 			})
-// 			.catch((err) => rej(err));
-// 	});
+// const getUser = async (username, password) => {
+// 	try {
+// 		await connect();
+// 		let result = await User.findOne({ username });
+// 		console.log(result);
+// 		if (!result) {
+// 			return createError(400, "user doesn't exist");
+// 		} else {
+// 			let data = await bcrypt.compare(password, result.password);
+// 			if (data) {
+// 				return result;
+// 			} else {
+// 				createError(401, "password doesn't match");
+// 			}
+// 		}
+// 	} catch (err) {
+// 		createError(500, err);
+// 	}
 // };
+
+const getUser = (username, password) => {
+	return new Promise((res, rej) => {
+		connect()
+			.then(() => {
+				User.findOne({ username })
+					.then((result) => {
+						console.log(result);
+						if (!result) {
+							rej("user is not exist");
+						} else {
+							bcrypt
+								.compare(password, result.password)
+								.then((data) => {
+									if (data) res(result);
+									else rej("the password doesn't match");
+								})
+								.catch((err) => {
+									rej(err);
+								});
+						}
+					})
+					.catch((err) => {
+						rej(err);
+					});
+			})
+			.catch((err) => rej(err));
+	});
+};
 
 module.exports = {
 	addUser,

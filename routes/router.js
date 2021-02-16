@@ -33,8 +33,8 @@ router.post("/register", async (req, res) => {
 router.post("/login", async (req, res) => {
 	let { username, password } = req.body;
 	try {
-		await db.getUser(username, password);
-		res.status(200).send("user");
+		let user = await db.getUser(username, password);
+		res.status(200).render("user", { user });
 	} catch (err) {
 		res.status(400).send(err);
 	}
